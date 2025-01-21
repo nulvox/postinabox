@@ -2,9 +2,15 @@
 #########################################################
 # This script is intended to be run like this:
 #
-#   curl https://mailinabox.email/setup.sh | sudo bash
+#   curl https://github.com/nulvox/postinabox/blob/main/setup/bootstrap.sh | sudo bash
 #
 #########################################################
+
+# If applicable, do user-configured preconfiguration steps such as modifying setup scripts to avoid program installations
+if [[ -x "/opt/piab/before.sh"]]
+then
+	source /opt/piab/before.sh
+fi
 
 if [ -z "$TAG" ]; then
 	# If a version to install isn't explicitly given as an environment
@@ -60,7 +66,7 @@ if [ ! -d "$HOME/mailinabox" ]; then
 	fi
 
 	if [ "$SOURCE" == "" ]; then
-		SOURCE=https://github.com/mail-in-a-box/mailinabox
+		SOURCE=https://github.com/nulvox/postinabox
 	fi
 
 	echo "Downloading Mail-in-a-Box $TAG. . ."
@@ -90,3 +96,8 @@ fi
 # Start setup script.
 setup/start.sh
 
+# If applicable, do user-configured postconfiguration steps such as modifying final nginx configurations.
+if [[ -x "/opt/piab/after.sh"]]
+then
+	source /opt/piab/after.sh
+fi
