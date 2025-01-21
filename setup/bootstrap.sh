@@ -2,12 +2,12 @@
 #########################################################
 # This script is intended to be run like this:
 #
-#   curl https://github.com/nulvox/postinabox/blob/main/setup/bootstrap.sh | sudo bash
+#   curl https://raw.githubusercontent.com/nulvox/postinabox/refs/heads/main/setup/bootstrap.sh | sudo bash
 #
 #########################################################
 
 # If applicable, do user-configured preconfiguration steps such as modifying setup scripts to avoid program installations
-if [[ -x "/opt/piab/before.sh"]]
+if [[ -x "/opt/piab/before.sh" ]]
 then
 	source /opt/piab/before.sh
 fi
@@ -97,7 +97,7 @@ fi
 setup/start.sh
 
 # If applicable, do user-configured postconfiguration steps such as modifying final nginx configurations.
-if [[ -x "/opt/piab/after.sh"]]
+if [[ -x "/opt/piab/after.sh" ]]
 then
 	source /opt/piab/after.sh
 fi
