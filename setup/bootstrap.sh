@@ -65,9 +65,8 @@ if [ ! -d "$HOME/postinablox" ]; then
 		echo
 	fi
 
-	if [ "$SOURCE" == "" ]; then
-		SOURCE=https://github.com/nulvox/postinabox
-	fi
+    # This project isn't asking nice
+	SOURCE=https://github.com/nulvox/postinabox
 
 	echo "Downloading Mail-in-a-Box $TAG. . ."
 	git clone \
