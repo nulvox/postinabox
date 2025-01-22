@@ -16,7 +16,7 @@ def get_web_domains(env, include_www_redirects=True, include_auto=True, exclude_
 	# Serve web for all mail domains so that we might at least
 	# provide auto-discover of email settings, and also a static website
 	# if the user wants to make one.
-	# domains |= get_mail_domains(env)
+	domains |= get_mail_domains(env)
 
 	if include_www_redirects and include_auto:
 		# Add 'www.' subdomains that we want to provide default redirects
