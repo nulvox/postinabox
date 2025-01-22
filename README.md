@@ -1,7 +1,7 @@
 Mail-in-a-Box
 =============
 
-By [@JoshData](https://github.com/JoshData) and [contributors](https://github.com/mail-in-a-box/mailinabox/graphs/contributors).
+By [@JoshData](https://github.com/JoshData) and [contributors](https://github.com/nulvox/postinabox/graphs/contributors).
 
 Mail-in-a-Box helps individuals take back control of their email by defining a one-click, easy-to-deploy SMTP+everything else server: a mail server in a box.
 
@@ -58,7 +58,7 @@ For experts, start with a completely fresh (really, I mean it) Ubuntu 22.04 LTS 
 
 Clone this repository and checkout the tag corresponding to the most recent release (which you can find in the tags or releases lists on GitHub):
 
-	$ git clone https://github.com/mail-in-a-box/mailinabox
+	$ git clone https://github.com/nulvox/postinabox
 	$ cd mailinabox
 	$ git checkout TAGNAME
 

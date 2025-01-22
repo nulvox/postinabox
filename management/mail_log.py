@@ -794,7 +794,7 @@ if __name__ == "__main__":
         description="Scan the mail log files for interesting data. By default, this script "
                     "shows today's incoming and outgoing mail statistics. This script was ("
                     "re)written for the Mail-in-a-box email server."
-                    "https://github.com/mail-in-a-box/mailinabox",
+                    "https://github.com/nulvox/postinabox",
         add_help=False
     )
 

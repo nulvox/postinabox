@@ -210,7 +210,7 @@ chown www-data:www-data "$STORAGE_ROOT/mail/roundcube/roundcube.sqlite"
 chmod 664 "$STORAGE_ROOT/mail/roundcube/roundcube.sqlite"
 
 # Patch the Roundcube code to eliminate an issue that causes postfix to reject our sqlite
-# user database (see https://github.com/mail-in-a-box/mailinabox/issues/2185)
+# user database (see https://github.com/nulvox/postinabox/issues/2185)
 sed -i.miabold 's/^[^#]\+.\+PRAGMA journal_mode = WAL.\+$/#&/' \
 /usr/local/lib/roundcubemail/program/lib/Roundcube/db/sqlite.php
 

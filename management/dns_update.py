@@ -392,7 +392,7 @@ def build_tlsa_record(env):
 	# Thanks to http://blog.huque.com/2012/10/dnssec-and-certificates.html
 	# and https://community.letsencrypt.org/t/please-avoid-3-0-1-and-3-0-2-dane-tlsa-records-with-le-certificates/7022
 	# for explaining all of this! Also see https://tools.ietf.org/html/rfc6698#section-2.1
-	# and https://github.com/mail-in-a-box/mailinabox/issues/268#issuecomment-167160243.
+	# and https://github.com/nulvox/postinabox/issues/268#issuecomment-167160243.
 	#
 	# There are several criteria. We used to use "3 0 1" criteria, which
 	# meant to pin a leaf (3) certificate (0) with SHA256 hash (1). But

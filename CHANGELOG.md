@@ -911,7 +911,7 @@ This update addresses some minor security concerns and some installation issues.
 
 ownCloud:
 
-* Block web access to the configuration parameters (config.php). There is no immediate impact (see [#776](https://github.com/mail-in-a-box/mailinabox/pull/776)), although advanced users may want to take note.
+* Block web access to the configuration parameters (config.php). There is no immediate impact (see [#776](https://github.com/nulvox/postinabox/pull/776)), although advanced users may want to take note.
 
 Mail:
 

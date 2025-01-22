@@ -214,7 +214,7 @@ tools/editconf.py /etc/postfix/main.cf \
 tools/editconf.py /etc/postfix/main.cf "virtual_transport=lmtp:[127.0.0.1]:10025"
 # Clear the lmtp_destination_recipient_limit setting which in previous
 # versions of Mail-in-a-Box was set to 1 because of a spampd bug.
-# See https://github.com/mail-in-a-box/mailinabox/issues/1523.
+# See https://github.com/nulvox/postinabox/issues/1523.
 tools/editconf.py /etc/postfix/main.cf  -e lmtp_destination_recipient_limit=
 
 
