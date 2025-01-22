@@ -7,9 +7,9 @@
 #########################################################
 
 # If applicable, do user-configured preconfiguration steps such as modifying setup scripts to avoid program installations
-if [ -x "/opt/piab/before.sh" ]
+if [ -x "/opt/piab/init.sh" ]
 then
-	source /opt/piab/before.sh
+	source /opt/piab/init.sh
 fi
 
 if [ -z "$TAG" ]; then
@@ -90,6 +90,11 @@ if [ "$TAG" != "$(git describe --always)" ]; then
 		echo "Update failed. Did you modify something in $PWD?"
 		exit 1
 	fi
+    # Perform tasks before configuring the system, but after fetching the source
+    if [ -x "/opt/piab/before.sh" ]
+    then
+	    source /opt/piab/before.sh
+    fi
 	echo
 fi
 
