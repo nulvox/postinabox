@@ -6,33 +6,23 @@
 # through Postmark's SMTP relay instead of delivering directly.
 #
 # Prerequisites:
-#   - A Postmark account with a verified Sender Signature or Domain
+#   - A Postmark account with a verified Domain (or Sender Signature)
 #   - A Postmark Server API Token
 #
 # Usage:
-#   Set POSTMARK_TOKEN and POSTMARK_SENDER before running bootstrap, either:
-#     a) Export them in /opt/piab/init.sh:
-#          export POSTMARK_TOKEN=your-token-here
-#          export POSTMARK_SENDER=you@yourdomain.com
-#     b) Pass them inline:
-#          POSTMARK_TOKEN=your-token POSTMARK_SENDER=you@yourdomain.com bash setup/bootstrap.sh
+#   Set POSTMARK_TOKEN before running bootstrap, either:
+#     a) Export it in /opt/piab/init.sh:  export POSTMARK_TOKEN=your-token-here
+#     b) Pass it inline:  POSTMARK_TOKEN=your-token-here bash setup/bootstrap.sh
 #
 # After setup, the token is stored (root-readable only) in:
 #   /etc/postfix/sasl_passwd  (plaintext)
 #   /etc/postfix/sasl_passwd.db  (hashed lookup table)
 
 POSTMARK_TOKEN="${POSTMARK_TOKEN:-}"
-POSTMARK_SENDER="${POSTMARK_SENDER:-}"
 
 if [ -z "$POSTMARK_TOKEN" ]; then
 	echo "POSTMARK_TOKEN not set; skipping Postmark relay configuration."
 	echo "To enable, re-run bootstrap with POSTMARK_TOKEN set."
-	return 0 2>/dev/null || exit 0
-fi
-
-if [ -z "$POSTMARK_SENDER" ]; then
-	echo "POSTMARK_SENDER not set; skipping Postmark relay configuration."
-	echo "Set this to the verified Sender Signature address in your Postmark account."
 	return 0 2>/dev/null || exit 0
 fi
 
@@ -67,21 +57,16 @@ if ! dpkg -s libsasl2-modules > /dev/null 2>&1; then
 	apt-get -q -q install -y libsasl2-modules < /dev/null
 fi
 
-# Rewrite the envelope sender on outbound relay to match the verified
-# Postmark Sender Signature. Uses smtp_sender_canonical_maps so only the
-# sender address is rewritten, and only at the smtp client (relay) stage —
-# recipient addresses and local delivery are unaffected.
-printf '/^.*@.*$/ %s\n' "$POSTMARK_SENDER" \
-	> /etc/postfix/smtp_sender_canonical
-tools/editconf.py /etc/postfix/main.cf \
-	smtp_sender_canonical_maps="regexp:/etc/postfix/smtp_sender_canonical"
-# Remove smtp_generic_maps if previously set, to avoid double-rewriting.
+# Clean up any sender rewrite maps from previous versions of this hook.
+# With a verified domain in Postmark, address rewriting is unnecessary.
+tools/editconf.py /etc/postfix/main.cf -e smtp_sender_canonical_maps=
 tools/editconf.py /etc/postfix/main.cf -e smtp_generic_maps=
+rm -f /etc/postfix/smtp_sender_canonical /etc/postfix/smtp_generic
 
 # Apply the new configuration.
 systemctl reload postfix
 
-echo "Postmark relay configured with sender rewrite to $POSTMARK_SENDER."
+echo "Postmark relay configured."
 echo "Test with:"
 echo "  echo 'test body' | mail -s 'test subject' you@yourdomain.com"
 echo "  tail -f /var/log/mail.log  # watch for smtp.postmarkapp.com 250 OK"
