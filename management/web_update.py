@@ -227,7 +227,18 @@ def make_domain_config(domain, templates, ssl_certificates, env):
 
 	# Replace substitution strings in the template & return.
 	# Build admin IP restriction if ADMIN_IP is set (allow/deny based).
+	# Check the environment first, then fall back to reading /opt/piab/init.sh
+	# since the management daemon may not have inherited the export.
 	admin_ip = os.environ.get("ADMIN_IP", env.get("ADMIN_IP", ""))
+	if not admin_ip and os.path.exists("/opt/piab/init.sh"):
+		import subprocess
+		try:
+			result = subprocess.run(
+				["bash", "-c", "source /opt/piab/init.sh && echo $ADMIN_IP"],
+				capture_output=True, text=True, timeout=5)
+			admin_ip = result.stdout.strip()
+		except Exception:
+			pass
 	if admin_ip:
 		restriction_lines = "\n".join(f"\t\tallow {ip.strip()};" for ip in admin_ip.split(","))
 		restriction_lines += "\n\t\tdeny all;"
