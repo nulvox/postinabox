@@ -1,6 +1,26 @@
 CHANGELOG
 =========
 
+Version 77 (September 26, 2026)
+-------------------------------
+
+* Roundcube updated to version 1.6.19, fixing numerous security issues.
+* Nextcloud updated to version 27.1.11, and install failure fixed.
+
+Version 76 (May 24, 2026)
+-------------------------
+
+* Fixed Nextcloud broken after PHP update by updating Nextcloud settings.
+* Fixed invalid HTML in the control panel broken by the last version.
+
+Version 75 (April 20, 2026)
+---------------------------
+
+* Updated Roundcube to 1.6.15, fixing a security vulnerability.
+* Fixed error when configuring S3 backups on empty buckets.
+* Fixed issue in management daemon name resolution.
+* Fixed accessibility issues in the control panel.
+
 Version 74 (January 4, 2026)
 ----------------------------
 
