@@ -57,7 +57,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Clone the Mail-in-a-Box repository if it doesn't exist.
-if [ ! -d "$HOME/postinablox" ]; then
+if [ ! -d "$HOME/postinabox" ]; then
 	if [ ! -f /usr/bin/git ]; then
 		echo "Installing git . . ."
 		apt-get -q -q update
