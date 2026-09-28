@@ -29,7 +29,7 @@ if [ -z "$TAG" ]; then
 	if [ "$UBUNTU_VERSION" == "Ubuntu 22.04 LTS" ]; then
 		# This machine is running Ubuntu 22.04, which is supported by
 		# Mail-in-a-Box versions 60 and later.
-		TAG=v74-piab
+		TAG=v77-piab
 	elif [ "$UBUNTU_VERSION" == "Ubuntu 18.04 LTS" ]; then
 		# This machine is running Ubuntu 18.04, which is supported by
 		# Mail-in-a-Box versions 0.40 through 5x.
@@ -57,7 +57,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Clone the Mail-in-a-Box repository if it doesn't exist.
-if [ ! -d "$HOME/postinablox" ]; then
+if [ ! -d "$HOME/postinabox" ]; then
 	if [ ! -f /usr/bin/git ]; then
 		echo "Installing git . . ."
 		apt-get -q -q update
